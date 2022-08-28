@@ -1,0 +1,19 @@
+name: ci-sonarcloud
+on:
+  pull_request:
+    branches:
+      -develop
+
+jobs:
+  run-ci:
+    runs-on: ubunto-latest
+    steps:
+    
+      - uses: actions/checkout@v2
+      - name: Use Node.js Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
